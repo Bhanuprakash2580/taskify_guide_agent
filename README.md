@@ -1,81 +1,89 @@
-A multi-agent AI system to manage tasks, notes, and workflow coordination in a Cloud environment using Google Cloud Datastore, FastAPI, and MCP (Multi-Agent Coordination Platform).
+# 🤖 AI Assistant
 
-The system allows users to interact with a workspace assistant that can create tasks, mark them complete, save notes, and summarize outputs using multiple coordinated AI agents.
+An intelligent AI Assistant built to automate tasks, answer queries, and assist users using modern AI capabilities.
 
-Features
-Multi-agent orchestration using SequentialAgent and sub-agents.
-Task management:
-Add, list, and complete tasks.
-Note management:
-Add and list notes.
-Automatic formatting and summarization of outputs.
-API-based system using FastAPI for easy integration.
-Logs integration with Google Cloud Logging.
-Persistent storage using Google Cloud Datastore.
-Technologies
-Python 3.10+
-FastAPI – Web API framework
-uvicorn – ASGI server
-MCP / Google ADK – Multi-agent orchestration
-Google Cloud Datastore – Database for tasks and notes
-Google Cloud Logging – Centralized logging
-dotenv – Environment variable management
-Setup Instructions
-1. Clone the repository
-git clone <your-repo-url>
-cd taskify_guide_agent
-2. Set up environment
+## 🚀 Features
 
-Create a .env file with the following variables:
+* 💬 Natural language conversation
+* ⚡ Fast API using FastAPI
+* ☁️ Deployable on Google Cloud Run
+* 🔗 Modular agent architecture
+* 🧠 AI-powered responses
+* 📦 Easy to extend tools
 
-MODEL=gemini-1.5-pro
-PROJECT_ID=
-SA_NAME=
-3. Install dependencies
+## 🛠️ Tech Stack
+
+* Python
+* FastAPI
+* Google ADK
+* Cloud Run
+* Uvicorn
+* Pydantic
+<img width="1906" height="867" alt="image" src="https://github.com/user-attachments/assets/092fc73c-e8fd-497c-800e-408842a8cb38" />
+
+## 📂 Project Structure
+
+```
+.
+├── main.py
+├── requirements.txt
+├── agent/
+├── tools/
+├── .env
+└── README.md
+```
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/abhishekmsm51w-star/taskify11.git
+cd taskify11
 pip install -r requirements.txt
+```
 
-Requirements include FastAPI, uvicorn, google-cloud-datastore, google-cloud-logging, dotenv, and MCP libraries.
+## ▶️ Run Locally
 
-4. Set up Google Cloud
+```bash
+uvicorn main:app --reload
+```
 
-Enable required services:
+## ☁️ Deploy to Cloud Run
 
-gcloud services enable \
-  run.googleapis.com \
-  artifactregistry.googleapis.com \
-  cloudbuild.googleapis.com \
-  aiplatform.googleapis.com \
-  compute.googleapis.com
+```bash
+uvx --from google-adk==1.14.0 \
+adk deploy cloud_run \
+  --project=$PROJECT_ID \
+  --region=us-central1 \
+  --service_name=ai-assistant \
+  --with_ui \
+  . \
+  -- \
+  --service-account=$SERVICE_ACCOUNT
+```
 
-Create and grant IAM roles to your service account:
+## 🔐 Environment Variables
 
-gcloud iam service-accounts create $SA_NAME \
-    --display-name="Service Account for Workspace"
+Create `.env` file:
 
-export SERVICE_ACCOUNT=$SA_NAME@${PROJECT_ID}.iam.gserviceaccount.com
+```
+PROJECT_ID=your-project-id
+GOOGLE_APPLICATION_CREDENTIALS=path-to-key.json
+```
 
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member="serviceAccount:$SERVICE_ACCOUNT" \
-    --role="roles/aiplatform.user"
-5. Run the server
-python main.py
+## 📌 Usage
 
-By default, it runs on http://0.0.0.0:8080.
+* Start server
+* Open provided URL
+* Chat with AI assistant
 
-API Endpoints
-POST /api/v1/workspace/chat
+## 🤝 Contributing
 
-Request Body:
+Pull requests are welcome. For major changes, open an issue first.
 
-{
-  "prompt": "Plan my workday and prepare for the team meeting"
-}
+## 📄 License
 
-Response Example:
+MIT License
 
-{
-  "status": "success",
-  "reply": "Here’s a suggested plan for your day: ...\nTasks and notes have been added."
-}
+---
 
-The assistant generates tasks, notes, and summaries dynamically.
+⭐ If you like this project, give it a star!
